@@ -5,10 +5,21 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
+      filename: './data.lambda.db3'
     }
   },
+  useNullAsDefault: true,
 
+  // ADDED here
+  // we can seperate out migrations and seeds directories
+  migrations: {
+    directory: './data/migrations'
+  },
+  seeds: './data/seeds'
+  
+
+
+  /*
   staging: {
     client: 'postgresql',
     connection: {
@@ -40,5 +51,7 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   }
+  */
+
 
 };
