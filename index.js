@@ -58,6 +58,47 @@ server.post('/api/cohorts', async (req, res) => {
     }
   });
 
+
+// update cohorts
+server.put('/api/cohorts/:id', async (req, res) => {
+    try {
+      const count = await db('cohorts')
+        .where({ id: req.params.id })
+        .update(req.body);
+  
+      if (count > 0) {
+        const cohort = await db('cohorts')
+          .where({ id: req.params.id })
+          .first();
+  
+        res.status(200).json(cohort);
+      } else {
+        res.status(404).json({ message: 'COHORT not found' });
+      }
+    } catch (error) {}
+  });
+  
+  // remove roles (inactivate the role)
+  server.delete('/api/cohorts/:id', async (req, res) => {
+    try {
+      const count = await db('cohorts')
+        .where({ id: req.params.id })
+        .del();
+  
+      if (count > 0) {
+        res.status(204)
+        .json({messsage: ` cohort with id ${id } removed `})   // Message never shows up
+        .end();
+      } else {
+        res.status(404).json({ message: `COHORT can't be deleted, not found` });
+      }
+    } catch (error) {}
+  });
+
+
+
+
+
 // SETUP environment
 server.listen(port, () =>
   console.log(`\n** API running on http://localhost:${port} **\n`)
@@ -66,3 +107,8 @@ server.listen(port, () =>
 
 // Create cohorts table
 // yarn knex
+
+
+// seed cohorts table
+// yarn knex seed:make 01-roles
+// yarn knex seed:run
