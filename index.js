@@ -29,6 +29,20 @@ server.get('/api/cohorts', async (req, res) => {
     }
   });
 
+
+// list a cohort by id
+server.get('/api/cohorts/:id', async (req, res) => {
+    // get the roles from the database
+    try {
+      const cohort = await db('cohorts')
+        .where({ id: req.params.id })
+        .first();
+      res.status(200).json(cohort);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
+  
 // add cohort
 server.post('/api/cohorts', async (req, res) => {
     try {
@@ -48,3 +62,7 @@ server.post('/api/cohorts', async (req, res) => {
 server.listen(port, () =>
   console.log(`\n** API running on http://localhost:${port} **\n`)
 );
+
+
+// Create cohorts table
+// yarn knex
