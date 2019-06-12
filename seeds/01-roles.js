@@ -17,7 +17,7 @@ exports.seed = function(knex, Promise) {
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
- // return knex('roles').del()
+ // return knex('cohorts').del()
  // truncate deletes all the data AND
  //    resets primary key back to one
   return knex('cohorts')     // !!!!  CHANGED tablename here
