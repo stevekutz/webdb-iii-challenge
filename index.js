@@ -43,10 +43,9 @@ server.get('/api/cohorts/:id', async (req, res) => {
     }
   });
   
-// list ALL STUDENTS in a cohort with given id
+// list ALL STUDENTS in a cohort with given idS
 server.get('/api/cohorts/:id/students', async (req, res) => {
-    try {
-        
+    try {   
         const {id} = req.params;
         const students = await db('students')
             .where('cohort_id', id);
